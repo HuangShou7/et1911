@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+	    http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	    http://www.springframework.org/schema/mvc
+	    http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+	<!-- 注解扫描器 -->
+    <context:component-scan base-package="com.etoak">
+    	<!-- 只扫描@Controller注解 -->
+    	<context:include-filter type="annotation" 
+    	expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+    <!-- 开启spring mvc配置 -->
+    <!-- 作用:1.代替RequestMapping和RequsertMappingHandlerAdapatcher -->
+    <!-- 2.内置大量参数转换器 -->
+    <!-- 3.可以自定义转换器 -->
+    <!-- 4.可以使用@RequestBody接收json参数,使用@ResponseBody返回json参数 -->
+    <!-- 4.1.默认使用JSON框架进行json转换 -->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    
+    <!-- ==spring mvc的静态资源处理方法== -->
+    <!-- 1.将静态资源(css,js)交给servlet容器内置的名字叫做default的servlet处理 -->
+    <mvc:default-servlet-handler/>
+    
+    <!-- 定制静态资源位置和访问路径 -->
+    <!-- <mvc:resources location="classpath:/static/" mapping="/s/**"></mvc:resources> -->
+    <!-- webapp目录下 <mvc:resources location="/static/" mapping="/s/**"></mvc:resources> -->
+    
+    <!-- 小范围在前 -->
+    <!-- 访问本地文件系统 -->
+    <mvc:resources location="file:d:/upload/" mapping="/pic/**"></mvc:resources>
+    
+    <mvc:resources location="classpath:/static/" mapping="/**"></mvc:resources>
+    
+    
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="prefix" value="/pages/"></property>
+    	<property name="suffix" value=".jsp"></property>
+    </bean>
+    
+</beans>
+
+
+
