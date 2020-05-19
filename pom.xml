@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="   http://maven.apache.org/POM/4.0.0    http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="   http://maven.apache.org/POM/4.0.0    http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.etoak.et1911</groupId>
 	<artifactId>et911</artifactId>
@@ -13,7 +11,9 @@
 		<module>springmvc-01-testhello</module>
 		<module>spring-01-hello</module>
 		<module>test-hello</module>
-	</modules>
+    <module>springmvc-02</module>
+    <module>springmvc-03</module>
+  </modules>
 	<!-- 作用:声明/管理依赖,但不引入依赖,由子工程自己决定依赖 -->
 	<dependencyManagement>
 		<dependencies>

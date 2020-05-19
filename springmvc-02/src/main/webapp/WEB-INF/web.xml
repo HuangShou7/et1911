@@ -1,0 +1,28 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  	<servlet>
+  		<servlet-name>et</servlet-name>
+  		<servlet-class>
+  			org.springframework.web.servlet.DispatcherServlet
+  		</servlet-class>
+  		<init-param>
+  			<!-- 修改容器的默认位置(位置和文件名称)
+  				:/WEB-INF/[servlet-name]-servlet.xml
+  				根目录:文件名
+  			 -->
+  			<param-name>contextConfigLocation</param-name>
+  			<param-value>classpath:spring-mvc.xml</param-value>
+  		</init-param>
+  		<load-on-startup>1</load-on-startup>
+  	</servlet>
+  	<servlet-mapping>
+  		<servlet-name>et</servlet-name>
+  		<!-- 1.*.action
+  		2,/* 拦截所有,包括jsp,不推荐
+  		3,/拦截所有请求,可以支持REST风格的请求,推荐 -->
+  		<url-pattern>/</url-pattern>
+  	</servlet-mapping>
+</web-app>
