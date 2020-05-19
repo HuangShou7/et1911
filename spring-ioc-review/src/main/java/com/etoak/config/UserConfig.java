@@ -12,7 +12,7 @@ import com.etoak.service.UserService;
  * */
 @Configuration 
 public class UserConfig {
-	//注册spring bean 返回类型:class 方法名:id,可修改
+	//注册spring bean 返回类型:==class 方法名:==id,可修改
 	@Bean("userService")
 	public UserService userService() {
 		return new UserService();
@@ -22,7 +22,7 @@ public class UserConfig {
 		UserAction userAction = new UserAction();
 		//userAction.setUserService(this.userService);
 		
-		//配合@Qualifier使用,代表@Autowired
+		//配合@Qualifier使用,代表@Autowired,相当于ref
 		userAction.setUserService(userService);
 		return userAction;
 	}
