@@ -22,6 +22,17 @@
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-webmvc</artifactId>
     </dependency>
+    <dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<scope>provided</scope>
+	</dependency>
+	<!-- jackson -->
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.9.5</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>springmvc-04-param</finalName>
