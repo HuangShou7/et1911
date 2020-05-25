@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class Car {
+	
+	
 	private Integer id;
 	//品牌
 	private String brand;
@@ -29,4 +31,5 @@ public class Car {
 	private String summary;
 	//创建时间
 	private String createTime;
+	
 }

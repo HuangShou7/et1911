@@ -38,7 +38,7 @@
 		<property name="username" value="root"></property>
 		<property name="password" value="etoak"></property>
 	</bean>
-
+	
 
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>

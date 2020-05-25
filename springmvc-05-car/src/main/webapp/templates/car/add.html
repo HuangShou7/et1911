@@ -160,7 +160,21 @@
 						div.addClass('input-group-addon').text('OK');
 					},
 					rules:{//校验规则
-						brand:'required', //key是name属性值
+						//brand:'required', //key是name属性值
+						brand:{
+							required:true,
+							//异步验证:
+							remote:{
+								url:path +'/car/check',
+								type:'get',
+								data:{
+									brand:function({
+										return $('#brand').val() && $('#series').val()
+									})
+								}
+								
+							}
+						},
 						series:'required',
 						price:{
 							required:true,
@@ -174,7 +188,11 @@
 						},
 					},
 					messages:{//检验信息
-						brand:'必填项',
+						//brand:'必填项',
+						brand:{
+							required:'必填项',
+							remote:'该品牌的系列号已存在',
+						},
 						series:'必填项',
 						price:{
 							required:'必填项',

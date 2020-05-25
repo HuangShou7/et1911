@@ -13,4 +13,17 @@
 			#{mileage},#{location},#{pic},#{summary},now()
 		)
 	</insert>
+	<select id="check" >
+		select 
+		id,brand,series,price,licensing_time as licensingTime,level,gearbox,
+		output_volume as outputVolume,
+			mileage,location,pic,summary,create_time as createTime
+		 from t_springmvc_car where brand = #{brand} and series = #{series]
+	</select>
+	<select id="querySome" resultType="Car">
+		select id,brand,series,price,licensing_time as licensingTime,level,gearbox,
+		output_volume as outputVolume,
+			mileage,location,pic,summary,create_time as createTime from t_springmvc_car 
+			 
+	</select>
 </mapper>

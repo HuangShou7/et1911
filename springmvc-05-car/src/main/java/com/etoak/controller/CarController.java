@@ -7,7 +7,9 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.etoak.bean.Car;
@@ -28,6 +30,11 @@ public class CarController {
 	public String toAdd() {
 		return "car/add";
 	}
+	// 跳转添加界面
+		@RequestMapping("/toList")
+		public String toList() {
+			return "car/list";
+		}
 
 	// 添加
 	@RequestMapping("/add")
@@ -49,8 +56,19 @@ public class CarController {
 		// 重定向返回
 		return "redirect:/car/toAdd";
 	}
-	@RequestMapping("/list")
-	public List<Car> list(){
-		return null;
+	//后端验证
+	
+	@GetMapping("/check")
+	public boolean check(String brand,String series) {
+		System.out.println(brand);
+		System.out.println(series);
+		return !carService.check(brand,series).isEmpty();
+	}
+	
+	
+	@GetMapping("/querySome")
+	@ResponseBody
+	public List<Car> querySome(){
+		return carService.querySome();
 	}
 }
