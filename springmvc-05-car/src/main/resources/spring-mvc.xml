@@ -16,11 +16,14 @@
 			expression="org.springframework.stereotype.Controller" />
 		<context:include-filter type="annotation"
 			expression="org.springframework.web.bind.annotation.RestController" />
+		<context:include-filter type="annotation" 
+			expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 		<!-- 排除@Service @Repository -->
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Service"></context:exclude-filter>
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Repository"></context:exclude-filter>
+		
 	</context:component-scan>
 
 	<!-- 开启spring mvc配置 -->
@@ -58,6 +61,28 @@
 		<!-- 文件大小限制2M -->
 		<property name="maxUploadSize" value="2097152"></property>
 	</bean>
+	<!-- 
+		@RequestMapping("/")
+		public String index(){
+			return index;		
+		}	 
+	-->
+	<mvc:view-controller path="/" view-name="index"/>
+	<mvc:view-controller path="/user/toLogin" view-name="login"/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 拦截所有请求 -->
+			<mvc:mapping path="/**"></mvc:mapping>
+			<!--  -->
+			<mvc:exclude-mapping path="/static/**" />
+			<mvc:exclude-mapping path="/code" />
+			<mvc:exclude-mapping path="/user/toLogin" />
+			<mvc:exclude-mapping path="/user/login" />
+			<!--  -->
+			
+			<bean class="com.etoak.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
 
 

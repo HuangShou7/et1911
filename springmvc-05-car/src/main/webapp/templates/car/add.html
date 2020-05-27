@@ -14,6 +14,9 @@
 </style>
 </head>
 <body>
+	<div>
+		<span th:text="${paramError}"></span>
+	</div>
 	<div id="form">
 		<form id="addForm" class="form-horizontal" role="form" 
 		method="post" enctype="multipart/form-data" th:action="@{/car/add}">
@@ -136,7 +139,8 @@
 			et1911.querySelectDict('level')
 			et1911.querySelectDict('output_volume')
 			et1911.queryGearbox()
-			et1911.validateForm()
+			//调用校验方法
+			//et1911.validateForm()
 		})
 		
 		let et1911 = {
@@ -160,21 +164,7 @@
 						div.addClass('input-group-addon').text('OK');
 					},
 					rules:{//校验规则
-						//brand:'required', //key是name属性值
-						brand:{
-							required:true,
-							//异步验证:
-							remote:{
-								url:path +'/car/check',
-								type:'get',
-								data:{
-									brand:function({
-										return $('#brand').val() && $('#series').val()
-									})
-								}
-								
-							}
-						},
+						brand:'required', //key是name属性值
 						series:'required',
 						price:{
 							required:true,
@@ -188,11 +178,7 @@
 						},
 					},
 					messages:{//检验信息
-						//brand:'必填项',
-						brand:{
-							required:'必填项',
-							remote:'该品牌的系列号已存在',
-						},
+						brand:'必填项',
 						series:'必填项',
 						price:{
 							required:'必填项',
