@@ -9,14 +9,15 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>spring-ioc-review</module>
-		<module>springmvc-01-hello</module>
-		<module>springmvc-01-testhello</module>
 		<module>spring-01-hello</module>
-		<module>test-hello</module>
+		<module>spring-01-hello</module>
 		<module>springmvc-02</module>
 		<module>springmvc-03</module>
 		<module>springmvc-04-param</module>
 		<module>springmvc-05-car</module>
+		<module>et1911-activemq</module>
+		<module>et1911-webservice</module>
+		<module>et1911-webservice/webservice-jdk-client</module>
 	</modules>
 	<!-- 作用:声明/管理依赖,但不引入依赖,由子工程自己决定依赖 -->
 	<dependencyManagement>

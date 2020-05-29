@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	
+	<!-- 引入 -->
+	<import resource="classpath:spring-email.xml"/>
+	<!-- Active  -->
+	<bean id="mqFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<constructor-arg name="userName" value="" />
+		<constructor-arg name="password" value="" />
+		<constructor-arg name="brokerURL" value="tcp://localhost:61616" />
+		<property name="useAsyncSend" value="true"></property>
+	</bean>
+	
+	<context:component-scan base-package="com.etoak"></context:component-scan>
+	<!--  -->
+	<bean id="connectionFactory" 
+	class="org.springframework.jms.connection.CachingConnectionFactory">
+		<constructor-arg name="targetConnectionFactory" ref="mqFactory" />
+		<property name="sessionCacheSize" value="20" />
+	</bean>
+	<!--  -->
+	<bean id="emailQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<!-- 队列名称 -->
+		<constructor-arg name="name" value="email" />
+	</bean>
+	<!-- 监听器(自定义) -->
+	<bean id="emailListener" class="com.etoak.listener.EmailQueueListener"></bean>
+	<!--  -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<!--  -->
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="emailQueue" />
+		<property name="messageListener" ref="emailListener" />
+		<!-- 设置为手动签收 -->
+		<property name="sessionAcknowledgeMode" value="2" />
+		
+	</bean>
+	
+</beans>
